@@ -5,6 +5,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hello WebAssembly GoLang</title>
+    <script src="https://unpkg.com/cytoscape/dist/cytoscape.min.js"></script>
+    <style type="text/css">
+      #graph-container {
+        height: 500px;
+      }
+    </style>
 </head>
 <body>
     <h1>Hello WebAssembly</h1>
@@ -12,10 +18,99 @@
     <button id="up"> Up </button>
     <button id="down"> Dowm </button>
     <button id="right"> Right </button>
-    <div id="map" style="height: 500px"></div>
+    <div id="map" style="height: 50px"></div>
 
     <script src="wasm_exec.js"></script>
     <script src="script.js"></script>
+    html
+
+
+    <div id="graph-container"></div>
+    <button onclick="runDFS()">Executar DFS</button>
+    <script>
+      // Grafo de exemplo
+      var elements = [
+        { data: { id: '1', label: '1' } },
+        { data: { id: '2', label: '2' } },
+        { data: { id: '3', label: '3' } },
+        { data: { id: '4', label: '4' } },
+        { data: { id: '5', label: '5' } },
+        { data: { id: '6', label: '6' } },
+        { data: { id: '7', label: '7' } },
+        { data: { id: '8', label: '8' } },
+        { data: { id: '9', label: '9' } },
+        { data: { source: '1', target: '2' } },
+        { data: { source: '1', target: '3' } },
+        { data: { source: '2', target: '4' } },
+        { data: { source: '2', target: '5' } },
+        { data: { source: '3', target: '4' } },
+        { data: { source: '5', target: '6' } },
+        { data: { source: '6', target: '7' } },
+        { data: { source: '7', target: '8' } },
+        { data: { source: '7', target: '9' } }
+      ];
+  
+      // Cria a visualização do grafo
+      var cy = cytoscape({
+        container: document.getElementById('graph-container'),
+        elements: elements,
+        style: [
+          {
+            selector: 'node',
+            style: {
+              'label': 'data(label)',
+  
+            }
+          }
+        ],
+        layout: {
+          name: 'preset',
+          positions: {
+              '1': { x: 100, y: 100 },
+              '2': { x: 200, y: 50 },
+              '3': { x: 200, y: 200 },
+              '4': { x: 300, y: 100 },
+              '5': { x: 300, y: 200 },
+              '6': { x: 300, y: 250 },
+              '7': { x: 400, y: 150 },
+              '8': { x: 500, y: 200 },
+              '9': { x: 500, y: 300 },
+          }
+         }
+  
+      });
+  
+      // Implementa o algoritmo DFS
+      var visited = new Set();
+      function dfs(node) {
+        visited.add(node);
+        cy.getElementById(node).select();
+        var edges = cy.getElementById(node).connectedEdges();
+        for (var i = 0; i < edges.length; i++) {
+          var adjacentNode = edges[i].target().id();
+          if (adjacentNode === node) {
+            adjacentNode = edges[i].source().id();
+          }
+          if (!visited.has(adjacentNode)) {
+            setTimeout(function() {
+              dfs(adjacentNode);
+            }, 500);
+          }
+        }
+      }
+  
+      // Executa o algoritmo DFS quando o botão é clicado
+      function runDFS() {
+        visited.clear();
+        for (var i = 1; i <= 9; i++) {
+          setTimeout(function(node) {
+            dfs(node);
+          }, 2000 * i, i.toString());
+        }
+      }
+    </script>
+
+
 
 </body>
 </html>
