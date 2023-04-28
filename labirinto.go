@@ -65,7 +65,7 @@ func (m *maze) dfs(row, col int) {
 	}
 }
 
-func labirinto() {
+func main() {
 	rows, cols := 30, 10
 	m := maze{rows: rows, cols: cols}
 	m.init()
