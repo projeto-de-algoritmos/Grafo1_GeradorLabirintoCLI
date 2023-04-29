@@ -69,36 +69,16 @@ func (m *maze) dfs(row, col int) {
 	}
 }
 
-func main() {
-	var rows, cols int
-	var dir string
-
-	fmt.Println("Informe quantas linhas deseja")
-	fmt.Scan(&rows)
-	fmt.Println("Informe quantas colunas deseja")
-	fmt.Scan(&cols)
-
-	fmt.Println("Informe o nome da imagem")
-	fmt.Scan(&dir)
-
-	fmt.Println()
-	fmt.Println()
-	fmt.Println()
-	fmt.Println()
-
-	m := maze{rows: rows, cols: cols}
-	m.init()
-	m.dfs(0, 0)
-
+func printMaze(m maze) {
 	// Print the maze
 	fmt.Print(" ")
-	for j := 0; j < cols; j++ {
+	for j := 0; j < m.cols; j++ {
 		fmt.Printf("_ ")
 	}
 	fmt.Println()
-	for i := 0; i < rows; i++ {
+	for i := 0; i < m.rows; i++ {
 		fmt.Print("|")
-		for j := 0; j < cols; j++ {
+		for j := 0; j < m.cols; j++ {
 			if m.cells[i][j].walls[2] {
 				fmt.Print("_")
 			} else {
@@ -112,6 +92,11 @@ func main() {
 		}
 		fmt.Println()
 	}
+}
+
+func createImage(m maze, dir string) {
+	rows, cols := m.rows, m.cols
+
 	// Create a new RGBA image with a white background
 	img := image.NewRGBA(image.Rect(0, 0, cols*10, rows*10))
 	bg := color.RGBA{255, 255, 255, 255}
@@ -137,14 +122,47 @@ func main() {
 		}
 	}
 
-	fmt.Println()
-	fmt.Println()
-	fmt.Println()
-	fmt.Println()
-
 	// Save the image to a file
 	f, _ := os.Create("img/" + dir + ".png")
 	defer f.Close()
 	png.Encode(f, img)
-	fmt.Println("Imagem salva com sucesso na pasta img")
+	fmt.Println("Imagem salva com sucesso")
+}
+
+func createMaze(rows, cols int) maze {
+	m := maze{rows: rows, cols: cols}
+	m.init()
+	m.dfs(0, 0)
+
+	return m
+}
+
+func getInput() (int, int, string) {
+	var rows, cols int
+	var dir string
+
+	fmt.Println("Informe quantas linhas deseja")
+	fmt.Scan(&rows)
+	fmt.Println("Informe quantas colunas deseja")
+	fmt.Scan(&cols)
+
+	fmt.Println("Informe o nome da imagem")
+	fmt.Scan(&dir)
+
+	return rows, cols, dir
+}
+
+func main() {
+	rows, cols, dir := getInput()
+
+	fmt.Println()
+	fmt.Println()
+
+	m := createMaze(rows, cols)
+	printMaze(m)
+
+	fmt.Println()
+	fmt.Println()
+
+	createImage(m, dir)
 }
