@@ -2,7 +2,11 @@ package main
 
 import (
 	"fmt"
+	"image"
+	"image/color"
+	"image/png"
 	"math/rand"
+	"os"
 	"time"
 )
 
@@ -67,11 +71,15 @@ func (m *maze) dfs(row, col int) {
 
 func main() {
 	var rows, cols int
+	var dir string
 
 	fmt.Println("Informe quantas linhas deseja")
 	fmt.Scan(&rows)
 	fmt.Println("Informe quantas colunas deseja")
 	fmt.Scan(&cols)
+
+	fmt.Println("Informe o nome da imagem")
+	fmt.Scan(&dir)
 
 	fmt.Println()
 	fmt.Println()
@@ -104,5 +112,39 @@ func main() {
 		}
 		fmt.Println()
 	}
+	// Create a new RGBA image with a white background
+	img := image.NewRGBA(image.Rect(0, 0, cols*10, rows*10))
+	bg := color.RGBA{255, 255, 255, 255}
+	for i := 0; i < img.Bounds().Dx(); i++ {
+		for j := 0; j < img.Bounds().Dy(); j++ {
+			img.SetRGBA(i, j, bg)
+		}
+	}
 
+	// Draw the maze on the image
+	for i := 0; i < rows; i++ {
+		for j := 0; j < cols; j++ {
+			if m.cells[i][j].walls[2] {
+				for k := 0; k < 10; k++ {
+					img.SetRGBA(j*10+k, (i+1)*10, color.RGBA{0, 0, 0, 255})
+				}
+			}
+			if m.cells[i][j].walls[1] {
+				for k := 0; k < 10; k++ {
+					img.SetRGBA((j+1)*10, i*10+k, color.RGBA{0, 0, 0, 255})
+				}
+			}
+		}
+	}
+
+	fmt.Println()
+	fmt.Println()
+	fmt.Println()
+	fmt.Println()
+
+	// Save the image to a file
+	f, _ := os.Create(dir + ".png")
+	defer f.Close()
+	png.Encode(f, img)
+	fmt.Println("Imagem salva com sucesso")
 }
