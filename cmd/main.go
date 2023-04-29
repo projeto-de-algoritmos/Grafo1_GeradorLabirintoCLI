@@ -143,8 +143,8 @@ func main() {
 	fmt.Println()
 
 	// Save the image to a file
-	f, _ := os.Create(dir + ".png")
+	f, _ := os.Create("img/" + dir + ".png")
 	defer f.Close()
 	png.Encode(f, img)
-	fmt.Println("Imagem salva com sucesso")
+	fmt.Println("Imagem salva com sucesso na pasta img")
 }
