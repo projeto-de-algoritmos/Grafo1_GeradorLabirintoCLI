@@ -1,45 +1,35 @@
-**!! Atenção: Renomeie o seu repositório para (Tema)_(NomeDoProjeto). !!** 
-
-Temas:
- - Grafos1
- - Grafos2
- - PD
- - D&C
- - Greed
- - Final 
  
- **!! *Não coloque os nomes dos alunos no título do repositório*. Exemplo de título correto: Grafos2_Labirinto-do-Minotauro !!**
- 
- (Apague essa seção)
+# Gerador de labirintos (CLI)
 
-# NomedoProjeto
-
-**Número da Lista**: X<br>
-**Conteúdo da Disciplina**: XXXXXXXXXX<br>
+**Número da Lista**: 30 <br>
+**Conteúdo da Disciplina**: Grafos1 <br>
 
 ## Alunos
+
 |Matrícula | Aluno |
 | -- | -- |
-| xx/xxxxxx  |  xxxx xxxx xxxxx |
-| xx/xxxxxx  |  xxxx xxxx xxxxx |
+| 20/2028211  |  Antônio Aldísio de Sousa Alves Ferreira Filho |
+| 19/0048221  |  Rodrigo Balbino Azevedo de Brito |
 
-## Sobre 
-Descreva os objetivos do seu projeto e como ele funciona. 
+## Sobre
+
+O projeto é um gerador de labirinto pseudo-aleatório via terminal que gera uma imagem em PNG. Sendo possível escolher o tamanho em linhas e colunas do labirinto e o nome da imagem. O objetivo é criar um labirinto a partir de grafos usando [depth first search (DFS) - busca pela profundidade -](https://en.wikipedia.org/wiki/Depth-first_search) utilizando a [linguagem golang](https://go.dev/).
 
 ## Screenshots
-Adicione 3 ou mais screenshots do projeto em funcionamento.
 
-## Instalação 
-**Linguagem**: xxxxxx<br>
-**Framework**: (caso exista)<br>
-Descreva os pré-requisitos para rodar o seu projeto e os comandos necessários.
+![img](asset/print01.png)
 
-## Uso 
-Explique como usar seu projeto caso haja algum passo a passo após o comando de execução.
+![img](asset/print02.png)
 
-## Outros 
-Quaisquer outras informações sobre seu projeto podem ser descritas abaixo.
+![img](asset/print03.png)
+
+## Instalação
+
+**Linguagem**: GoLang - 1.20 <br>
 
 
+## Uso
 
-
+```bash
+cd cmd && go run main.go
+```
