@@ -66,7 +66,18 @@ func (m *maze) dfs(row, col int) {
 }
 
 func main() {
-	rows, cols := 30, 10
+	var rows, cols int
+
+	fmt.Println("Informe quantas linhas deseja")
+	fmt.Scan(&rows)
+	fmt.Println("Informe quantas colunas deseja")
+	fmt.Scan(&cols)
+
+	fmt.Println()
+	fmt.Println()
+	fmt.Println()
+	fmt.Println()
+
 	m := maze{rows: rows, cols: cols}
 	m.init()
 	m.dfs(0, 0)
@@ -93,4 +104,5 @@ func main() {
 		}
 		fmt.Println()
 	}
+
 }
