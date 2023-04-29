@@ -13,7 +13,7 @@
 
 ## Sobre
 
-O projeto é um gerador de labirinto pseudo-aleatório via terminal que gera uma imagem em PNG. Sendo possível escolher o tamanho em linhas e colunas do labirinto e o nome da imagem. O objetivo é criar um labirinto a partir de grafos usando [depth first search (DFS) - busca pela profundidade -](https://en.wikipedia.org/wiki/Depth-first_search) utilizando a [linguagem golang](https://go.dev/).
+O projeto é um gerador de labirinto pseudo-aleatório via terminal que gera uma imagem em PNG. Sendo possível escolher o tamanho em linhas e colunas do labirinto e o nome da imagem. O objetivo é criar um labirinto a partir de grafos usando [depth first search (DFS) - busca pela profundidade -](https://en.wikipedia.org/wiki/Depth-first_search).
 
 ## Screenshots
 
@@ -27,7 +27,7 @@ O projeto é um gerador de labirinto pseudo-aleatório via terminal que gera uma
 
 ## Instalação
 
-**Linguagem**: GoLang - 1.20 <br>
+**Linguagem**: [Golang](https://go.dev/). - 1.20 <br>
 
 
 ## Uso
