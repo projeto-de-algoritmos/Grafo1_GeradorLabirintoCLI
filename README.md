@@ -23,6 +23,8 @@ O projeto é um gerador de labirinto pseudo-aleatório via terminal que gera uma
 
 ![img](asset/print03.png)
 
+![img](cmd/img/exemplo.png)
+
 ## Instalação
 
 **Linguagem**: GoLang - 1.20 <br>
